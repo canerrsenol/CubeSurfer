@@ -41,6 +41,7 @@ namespace CubeSurfer.CubeController
             }
             else if(other.CompareTag("Obstacle"))
             {
+                other.tag = "Player";
                 decreaseHeight = other.GetComponent<ObstacleProperties>().ObstacleLength;
                 print(cubeList.Count + "Cublelist count");
                 print(decreaseHeight + "decrease count");
@@ -68,7 +69,7 @@ namespace CubeSurfer.CubeController
 
         private void OnTriggerExit(Collider other)
         {
-            if(other.CompareTag("Obstacle"))
+            if(other.CompareTag("Player"))
             {
                 foreach(Transform child in _player)
                 {

@@ -1,3 +1,4 @@
+using CubeSurfer.Movement;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,9 +42,12 @@ namespace CubeSurfer.CubeController
             else if(other.CompareTag("Obstacle"))
             {
                 decreaseHeight = other.GetComponent<ObstacleProperties>().ObstacleLength;
+                print(cubeList.Count + "Cublelist count");
+                print(decreaseHeight + "decrease count");
+
                 if(decreaseHeight >= cubeList.Count)
                 {
-                    // Game over
+                    GameOver();
                 }
                 else
                 {
@@ -54,6 +58,12 @@ namespace CubeSurfer.CubeController
                     }
                 }
             }
+        }
+
+        private void GameOver()
+        {
+            _player.GetComponent<MovementController>().enabled = false;
+            _playerModelTransform.GetComponent<Animator>().SetBool("death", true);
         }
 
         private void OnTriggerExit(Collider other)
